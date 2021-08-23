@@ -22,7 +22,7 @@ window.onload = () => {
     const score = {
      points: 0,
      draw: function (){
-        ctx.font = '60 Verdana'; //this is an example, MUST BE FIXED
+        ctx.font = '30px Verdana'; //this is an example, MUST BE FIXED
         ctx.fillStyle = 'gold'; //this is an example, MUST BE FIXED
         ctx.fillText('Score: ' + this.points, 200, 50);
         }
