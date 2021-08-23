@@ -1,9 +1,10 @@
 const obstacleImg = document.createElement('img');
-obstacleImg.src = 'images/67-675339_33-night-king-from-game-of-thrones-game-removebg-preview.png';//ADD OBSTACLE IMAGE
+obstacleImg.src = 'images/gratis-png-robot-sprite-mecha-juego-de-plataforma-robot-removebg-preview.png';//ADD OBSTACLE IMAGE
 
 class Obstacle {
 constructor(canvasContext, positionX, positionY, width, height, speed){
     this.ctx = canvasContext,
+    this.image = obstacleImg,
     this.x = positionX,
     this.y = positionY,
     this.width = width,

@@ -10,33 +10,32 @@ window.onload = () => {
 //Paint in the canvas from the constructors
 
     const background = new Background(ctx);
-    const dragon = new Dragon (ctx, canvas.width / 2 - 50, canvas.height - 110); //this is an example, MUST BE FIXED
-
-
-//Create the array to store the obstacles/white walkers
-
-    let obstaclesArray = [];
+    const dragon = new Dragon (ctx, canvas.width / 2 - 50, canvas.height - 150); //this is an example, MUST BE FIXED
 
 //Create the score
 
-    const score = {
-     points: 0,
-     draw: function (){
-        ctx.font = '30px Verdana'; //this is an example, MUST BE FIXED
-        ctx.fillStyle = 'gold'; //this is an example, MUST BE FIXED
-        ctx.fillText('Score: ' + this.points, 200, 50);
-        }
-    };
+const score = {
+    points: 0,
+    draw: function (){
+       ctx.font = '30px Verdana'; //this is an example, MUST BE FIXED
+       ctx.fillStyle = 'gold'; //this is an example, MUST BE FIXED
+       ctx.fillText('Score: ' + this.points, 200, 50);
+       }
+   };
+
+//Create the array to store the obstacles/white walkers
+
+   let obstaclesArray = [];
 
 //create an interval to add adding white-walkers in to the Obstacles Array
 
-    obstacleId = setInterval(function (){
+    obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
         ctx,
-        Math.random() * canvas.width - 200, //position X (example, MUST BE FIXED)
+        Math.random() * canvas.width - 100, //position X (example, MUST BE FIXED)
         0, //position Y
-        Math.random() * 100 + 100, //width, example MUST BE FIXED
-        Math.random() * 15 + 10, //heigth, example MUST BE FIXED
+        Math.random() * 50 + 50, //width, example MUST BE FIXED
+        Math.random() * 15 + 10, //height, example MUST BE FIXED
         Math.ceil(Math.random()* 3)//speed, example, MUST BE FIXED
     );
 
@@ -57,8 +56,8 @@ window.onload = () => {
 
         if (collision){
             cancelAnimationFrame(frameId);
-            clearInterval(obstaclesId);
-            alert('GAME OVER! The Night King got you, now you belong to the White Walkers')
+            clearInterval(obstacleId);
+            alert('GAME OVER!')
             window.location.reload();
              }
         }
@@ -128,8 +127,6 @@ window.onload = () => {
             if (dragon.x < canvas.width - dragon.width) dragon.x +=15; //must be FIXED
             break;
 // THE DRAGON IS NOT SHOOTING FIRE, SPACEBAR KEYCODE MUST BE ADDED
-            default:
-                break;
 
              }
 

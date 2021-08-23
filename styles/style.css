@@ -1,4 +1,6 @@
 body {
+  background-color: rgb(6, 6, 10);
+   size: cover;
     padding: 0;
     text-align: center;
   }
@@ -9,12 +11,16 @@ body {
   }
   
   .game-intro p {
-    font-size: 18px;
+    color: #054b50;
+    font-size: 25px;
     font-family: "Verdana"
+    
   }
   
   .logo-img {
-    width: 550px;
+    width: 1000px;
+    margin-bottom: 20px;
+    padding-top: 50px;
   }
   
   .arrows-img {
@@ -23,12 +29,12 @@ body {
   
   body button {
     font-size: 30px;
-    background-color: #2908e0;
+    background-color: #054b50;
     color: #fff;
     padding: 20px 40px;
     border: 0;
     box-shadow: 0;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 20px;
   }
   
@@ -39,5 +45,5 @@ body {
   
   
   canvas {
-    border: 1px solid rgb(38, 0, 255);
+    border: 1px solid #054b50;
   }

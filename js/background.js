@@ -8,7 +8,7 @@ class Background {
         this.x = 0;
         this.y = 0;
         this.width = 600;
-        this.height = 900;
+        this.height = 1000;
     }
 
     draw() {
