@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
 body {
+  font-family: "Orbitron";
   background-color: rgb(6, 6, 10);
    size: cover;
     padding: 0;
@@ -11,9 +14,9 @@ body {
   }
   
   .game-intro p {
-    color: #054b50;
-    font-size: 25px;
-    font-family: "Verdana"
+    color: #08818a;
+    font-size: 20px;
+    font-family: "Orbitron"
     
   }
   
@@ -28,6 +31,7 @@ body {
   }
   
   body button {
+    font-family: "Orbitron";
     font-size: 30px;
     background-color: #054b50;
     color: #fff;
@@ -36,6 +40,12 @@ body {
     box-shadow: 0;
     border-radius: 10px;
     margin-bottom: 20px;
+    transition-property: 0.4s;
+  }
+
+  button:hover {
+    background-color: white;
+    color: #054b50;
   }
   
   #game-board {

@@ -1,5 +1,5 @@
 const obstacleImg = document.createElement('img');
-obstacleImg.src = '../images/gratis-png-robot-sprite-mecha-juego-de-plataforma-robot-removebg-preview.png';//ADD OBSTACLE IMAGE
+obstacleImg.src = 'images/gratis-png-robot-sprite-mecha-juego-de-plataforma-robot-removebg-preview.png';//ADD OBSTACLE IMAGE
 
 class Obstacle {
 constructor(canvasContext, positionX, positionY, width, height, speed){
@@ -13,7 +13,7 @@ constructor(canvasContext, positionX, positionY, width, height, speed){
 }
 
 draw() {
-    this.ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 }
 
 move (){

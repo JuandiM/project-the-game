@@ -25,13 +25,13 @@ const score = {
 
 //Create the array to store the enemies
 
-   let obstaclesArray = [];
+   const obstaclesArray = [];
 
-//create an interval to add adding enemies in to the Obstacles Array
+//create an interval to add enemies into the Obstacles Array
 
     obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
-        ctx,
+        ctx, 
         Math.random() * canvas.width - 50, //position X (example, MUST BE FIXED)
         0, //position Y
         Math.random() * 50 + 50, //width, example MUST BE FIXED
@@ -77,7 +77,14 @@ const score = {
 
     }
 
-//
+//Player shooting
+/*
+
+
+
+
+*/
+
 
 //THE GAME LOGIC
 
@@ -96,12 +103,12 @@ const score = {
     background.draw();
     player.draw();
     score.draw();
-    
+    console.log(obstaclesArray)
 
 //Loop in the array and print and move every obstacle
     obstaclesArray.forEach((eachObstacle) => {
         eachObstacle.draw();
-        console.log(`this obstacles ` , eachObstacle);
+        //console.log(`this obstacles ` , eachObstacle.draw());
         eachObstacle.move();
         checkCollisions(player, eachObstacle);
         });

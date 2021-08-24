@@ -7,8 +7,8 @@ this.ctx = canvasContext
 this.image = playerImg,
 this.x = positionX,
 this.y = positionY,
-this.width = 80,
-this.height = 120
+this.width = 100,
+this.height = 150
     }
 
     draw() {
