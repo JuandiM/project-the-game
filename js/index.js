@@ -23,19 +23,19 @@ const score = {
        }
    };
 
-//Create the array to store the obstacles/white walkers
+//Create the array to store the enemies
 
    let obstaclesArray = [];
 
-//create an interval to add adding white-walkers in to the Obstacles Array
+//create an interval to add adding enemies in to the Obstacles Array
 
     obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
         ctx,
-        Math.random() * canvas.width - 100, //position X (example, MUST BE FIXED)
-        0, //position Y
+        0, //position X (example, MUST BE FIXED)
+        Math.random() * canvas.height - 50, //position Y
         Math.random() * 50 + 50, //width, example MUST BE FIXED
-        Math.random() * 15 + 10, //height, example MUST BE FIXED
+        Math.random() * 35 + 35, //height, example MUST BE FIXED
         Math.ceil(Math.random()* 3)//speed, example, MUST BE FIXED
     );
 
@@ -76,6 +76,9 @@ const score = {
         score.points += numObstaclesTotal - numObstaclesOnScreen;
 
     }
+
+
+//
 
 //THE GAME LOGIC
 
