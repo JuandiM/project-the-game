@@ -10,7 +10,7 @@ window.onload = () => {
 //Paint in the canvas from the constructors
 
     const background = new Background(ctx);
-    const dragon = new Dragon (ctx, canvas.width / 2 - 50, canvas.height - 150); //this is an example, MUST BE FIXED
+    const player = new Player (ctx, canvas.width / 2 - 50, canvas.height - 150); //this is an example, MUST BE FIXED
 
 //Create the score
 
@@ -32,8 +32,8 @@ const score = {
     obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
         ctx,
-        0, //position X (example, MUST BE FIXED)
-        Math.random() * canvas.height - 50, //position Y
+        Math.random() * canvas.width - 50, //position X (example, MUST BE FIXED)
+        0, //position Y
         Math.random() * 50 + 50, //width, example MUST BE FIXED
         Math.random() * 35 + 35, //height, example MUST BE FIXED
         Math.ceil(Math.random()* 3)//speed, example, MUST BE FIXED
@@ -47,12 +47,12 @@ const score = {
 
 //Determine when the collision happens
 
-    function checkCollisions(dragon, obstacle){
+    function checkCollisions(player, obstacle){
         let collision = 
-            dragon.x < obstacle.x + obstacle.width &&
-            dragon.x + dragon.width > obstacle.x &&
-            dragon.y < obstacle.y + obstacle.height &&
-            dragon.y + dragon.height > obstacle.y;
+            player.x < obstacle.x + obstacle.width &&
+            player.x + player.width > obstacle.x &&
+            player.y < obstacle.y + obstacle.height &&
+            player.y + player.height > obstacle.y;
 
         if (collision){
             cancelAnimationFrame(frameId);
@@ -77,7 +77,6 @@ const score = {
 
     }
 
-
 //
 
 //THE GAME LOGIC
@@ -95,15 +94,16 @@ const score = {
 
 //Add the objects
     background.draw();
-    dragon.draw();
+    player.draw();
     score.draw();
     
 
 //Loop in the array and print and move every obstacle
     obstaclesArray.forEach((eachObstacle) => {
         eachObstacle.draw();
+        console.log(`this obstacles ` , eachObstacle);
         eachObstacle.move();
-        checkCollisions(dragon, eachObstacle);
+        checkCollisions(player, eachObstacle);
         });
 
 //Remove obstacles that outside of the screen and update score
@@ -117,19 +117,19 @@ const score = {
          gameLoop();
         }
 
-//Add move to the dragon with the arrow keys adding an event listener
+//Add move to the player with the arrow keys adding an event listener
 
-    window.addEventListener('keydown', moveDragon);
+    window.addEventListener('keydown', movePlayer);
 
-    function moveDragon(event) {
+    function movePlayer(event) {
         switch (event.keyCode){
             case 37:
-            if (dragon.x >0) dragon.x -=15; //must be FIXED
+            if (player.x >0) player.x -=15; //must be FIXED
             break;
             case 39:
-            if (dragon.x < canvas.width - dragon.width) dragon.x +=15; //must be FIXED
+            if (player.x < canvas.width - player.width) player.x +=15; //must be FIXED
             break;
-// THE DRAGON IS NOT SHOOTING FIRE, SPACEBAR KEYCODE MUST BE ADDED
+// THE PLAYER IS NOT SHOOTING FIRE, SPACEBAR KEYCODE MUST BE ADDED
 
              }
 
