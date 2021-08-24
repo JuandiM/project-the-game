@@ -8,7 +8,7 @@ this.image = playerImg,
 this.x = positionX,
 this.y = positionY,
 this.width = 100,
-this.height = 150
+this.height = 150;
     }
 
     draw() {

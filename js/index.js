@@ -5,6 +5,7 @@ window.onload = () => {
     const ctx = canvas.getContext('2d');
     let frameId = null;
     let obstacleId = null;
+    let bulletsArray = [];
 
 
 //Paint in the canvas from the constructors
@@ -17,7 +18,7 @@ window.onload = () => {
 const score = {
     points: 0,
     draw: function (){
-       ctx.font = '30px Verdana'; //this is an example, MUST BE FIXED
+       ctx.font = '30px Orbitron'; //this is an example, MUST BE FIXED
        ctx.fillStyle = 'gold'; //this is an example, MUST BE FIXED
        ctx.fillText('Score: ' + this.points, 200, 50);
        }
@@ -35,15 +36,15 @@ const score = {
         Math.random() * canvas.width - 50, //position X (example, MUST BE FIXED)
         0, //position Y
         Math.random() * 50 + 50, //width, example MUST BE FIXED
-        Math.random() * 35 + 35, //height, example MUST BE FIXED
-        Math.ceil(Math.random()* 3)//speed, example, MUST BE FIXED
+        Math.random() * 50 + 50, //height, example MUST BE FIXED
+        Math.ceil(Math.random()* 0.5)//speed, example, MUST BE FIXED
     );
 
     score.points +=10;
 
     obstaclesArray.push(obstacle);
 
-        }, 2000); //time, example MUST BE FIXED
+        }, 4000); //time, example MUST BE FIXED
 
 //Determine when the collision happens
 
@@ -71,6 +72,10 @@ const score = {
         eachObstacle.y < canvas.height;
         });
 
+        bulletsArray = bulletsArray.filter((eachBullet) => {
+            eachBullet.y < 0;
+            });
+
         numObstaclesOnScreen = obstaclesArray.length;
 
         score.points += numObstaclesTotal - numObstaclesOnScreen;
@@ -78,12 +83,21 @@ const score = {
     }
 
 //Player shooting
-/*
+
+function makeBullet (){
+    let bullet = new Bullet (
+        ctx, 
+        player.x + player.width/2 - 10/2,   //position X (example, MUST BE FIXED)
+        player.y, //position Y
+        
+    ); 
+
+    bulletsArray.push(bullet);
+}
 
 
 
 
-*/
 
 
 //THE GAME LOGIC
@@ -103,6 +117,7 @@ const score = {
     background.draw();
     player.draw();
     score.draw();
+    
     console.log(obstaclesArray)
 
 //Loop in the array and print and move every obstacle
@@ -111,6 +126,14 @@ const score = {
         //console.log(`this obstacles ` , eachObstacle.draw());
         eachObstacle.move();
         checkCollisions(player, eachObstacle);
+        });
+
+        //Loop in the array and print the bullets
+    bulletsArray.forEach((eachBullet) => {
+        eachBullet.draw();
+        
+        eachBullet.move();
+        
         });
 
 //Remove obstacles that outside of the screen and update score
@@ -136,10 +159,15 @@ const score = {
             case 39:
             if (player.x < canvas.width - player.width) player.x +=15; //must be FIXED
             break;
-// THE PLAYER IS NOT SHOOTING FIRE, SPACEBAR KEYCODE MUST BE ADDED
-
+            case 32:
+                if (event.repeat) {
+                    break;      // do nothing when event is in repeat mode
+                }
+                else {
+                    makeBullet();
+                    break;
+                }
              }
-
 
          }
 

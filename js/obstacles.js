@@ -7,8 +7,8 @@ constructor(canvasContext, positionX, positionY, width, height, speed){
     (this.image = obstacleImg),
     (this.x = positionX),
     (this.y = positionY),
-    (this.width = width),
-    (this.height = height),
+    (this.width = 60),
+    (this.height = 80),
     (this.speed = speed);
 }
 
