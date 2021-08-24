@@ -63,6 +63,31 @@ const score = {
              }
         }
 
+        //Determine when a bullet kill an enemy
+
+   /* for (i=0; i<obstaclesArray.length; i++){
+       let obstacle = obstaclesArray[i];
+       let bang = false;
+
+       for (let j=0; j < bulletsArray.length; j++){
+           let bullet =bulletsArray[j];
+
+           if (bullet.x >= (obstacle.x - obstacle.width / 2) && bullet.x <= (obstacle.x + obstacle.width / 2) &&
+           bullet.y >= (obstacle.y - obstacle.height/2) && bullet.y <= (obstacle.y + obstacle.height / 2)){
+
+            bullet.splice(j--, 1);
+            bang = true;
+            score.points +=10;
+            break;
+           }
+       }
+       if (bang) {
+           obstacle.splice(i--, 1);
+       }
+   
+    } */
+  
+
 //Scores points
 
     function updateScore () {
@@ -87,7 +112,7 @@ const score = {
 function makeBullet (){
     let bullet = new Bullet (
         ctx, 
-        player.x + player.width/2 - 10/2,   //position X (example, MUST BE FIXED)
+        player.x + player.width/1.35 - 10/2,   //position X (example, MUST BE FIXED)
         player.y, //position Y
         
     ); 

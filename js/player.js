@@ -1,5 +1,5 @@
 const playerImg = document.createElement('img');
-playerImg.src = 'images/ironman-fly--removebg-preview.png';//ADD IMAGE
+playerImg.src = 'images/Mobile - Marvel Avengers Alliance - Iron Man Mark 5 Armor.png';//ADD IMAGE
 
 class Player {
     constructor(canvasContext, positionX, positionY){

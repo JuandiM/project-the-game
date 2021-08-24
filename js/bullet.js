@@ -1,5 +1,5 @@
 const bulletImg = document.createElement('img');
-bulletImg.src = 'images/city.png';//ADD BULLET IMAGE
+bulletImg.src = 'images/Daco_4084688.png';//ADD BULLET IMAGE
 
 class Bullet {
 constructor(canvasContext, positionX, positionY){

@@ -1,5 +1,5 @@
 const obstacleImg = document.createElement('img');
-obstacleImg.src = 'images/gratis-png-robot-sprite-mecha-juego-de-plataforma-robot-removebg-preview.png';//ADD OBSTACLE IMAGE
+obstacleImg.src = 'images/Ultron.png';//ADD OBSTACLE IMAGE
 
 class Obstacle {
 constructor(canvasContext, positionX, positionY, width, height, speed){
