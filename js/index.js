@@ -65,28 +65,26 @@ const score = {
 
         //Determine when a bullet kill an enemy
 
-   /* for (i=0; i<obstaclesArray.length; i++){
-       let obstacle = obstaclesArray[i];
-       let bang = false;
-
-       for (let j=0; j < bulletsArray.length; j++){
-           let bullet =bulletsArray[j];
-
-           if (bullet.x >= (obstacle.x - obstacle.width / 2) && bullet.x <= (obstacle.x + obstacle.width / 2) &&
-           bullet.y >= (obstacle.y - obstacle.height/2) && bullet.y <= (obstacle.y + obstacle.height / 2)){
-
-            bullet.splice(j--, 1);
-            bang = true;
-            score.points +=10;
-            break;
-           }
-       }
-       if (bang) {
-           obstacle.splice(i--, 1);
-       }
    
-    } */
-  
+   function killEnemy(){
+   for(let i=0;i<obstaclesArray.length;i++){
+		for(let j=0;j<bulletsArray.length;j++){
+
+			if(!obstaclesArray[i]) continue;
+			
+			if(bulletsArray[j].y <= obstaclesArray[i].y + obstacleImg.height && bulletsArray[j].y >= obstaclesArray[i].y){
+				if( (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j].x <= obstaclesArray[i].x + obstacleImg.width) || (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j]  <= obstaclesArray[i].x + obstacleImg.width) ){
+					score.points +=10;
+					obstaclesArray.splice(i, 1);
+					
+					bulletsArray.splice(j, 1);
+				}
+			}
+		}
+	}
+} 
+   
+
 
 //Scores points
 
@@ -121,10 +119,6 @@ function makeBullet (){
 }
 
 
-
-
-
-
 //THE GAME LOGIC
 
     function gameLoop (){
@@ -142,6 +136,7 @@ function makeBullet (){
     background.draw();
     player.draw();
     score.draw();
+    killEnemy();
     
     console.log(obstaclesArray)
 
@@ -177,6 +172,7 @@ function makeBullet (){
     window.addEventListener('keydown', movePlayer);
 
     function movePlayer(event) {
+        event.preventDefault();
         switch (event.keyCode){
             case 37:
             if (player.x >0) player.x -=15; //must be FIXED
