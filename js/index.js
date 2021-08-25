@@ -67,13 +67,37 @@ const score = {
 
    
    function killEnemy(){
+       let hit = false
+       console.log("obstacleImg: ", obstacleImg)
    for(let i=0;i<obstaclesArray.length;i++){
 		for(let j=0;j<bulletsArray.length;j++){
 
 			if(!obstaclesArray[i]) continue;
 			
-			if(bulletsArray[j].y <= obstaclesArray[i].y + obstacleImg.height && bulletsArray[j].y >= obstaclesArray[i].y){
-				if( (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j].x <= obstaclesArray[i].x + obstacleImg.width) || (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j]  <= obstaclesArray[i].x + obstacleImg.width) ){
+            const bullet = bulletsArray[j]
+            const obstacle = obstaclesArray[i]
+            hit = (
+                (
+                    bullet.y <= obstacle.y + obstacle.height &&
+                    bullet.y >= obstacle.y
+                )
+                &&
+                (
+                    bullet.y + bullet.height >= obstacle.y &&
+                    bullet.y + bullet.height <= obstacle.y + obstacle.height
+                )
+                &&
+                (
+                    bullet.x <= obstacle.x + obstacle.width &&
+                    bullet.x + bullet.width >= obstacle.x
+                )
+                &&
+                (
+                    bullet.x + bullet.width <= obstacle.x + obstacle.width &&
+                    bullet.x + bullet.width >= obstacle.x 
+                )
+            )
+				if(hit){
 					score.points +=10;
 					obstaclesArray.splice(i, 1);
 					
@@ -82,7 +106,6 @@ const score = {
 			}
 		}
 	}
-} 
    
 
 
@@ -191,6 +214,4 @@ function makeBullet (){
              }
 
          }
-
-
 };
