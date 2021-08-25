@@ -4,11 +4,11 @@ backgroundImg.src = 'images/city.png';//ADD BACKGROUND IMAGE
 
 class Background {
     constructor(canvasContext) {
-        this.ctx=canvasContext,
+        this.ctx=canvasContext;
         this.x = 0;
         this.y = 0;
-        this.width = 600;
-        this.height = 1000;
+        this.width = 500;
+        this.height = 700;
     }
 
     draw() {

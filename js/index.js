@@ -11,7 +11,7 @@ window.onload = () => {
 //Paint in the canvas from the constructors
 
     const background = new Background(ctx);
-    const player = new Player (ctx, canvas.width / 2 - 50, canvas.height - 150); //this is an example, MUST BE FIXED
+    const player = new Player (ctx, canvas.width / 2 - 100, canvas.height - 150); //this is an example, MUST BE FIXED
 
 //Create the score
 
@@ -33,23 +33,24 @@ const score = {
     obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
         ctx, 
-        Math.random() * canvas.width - 50, //position X (example, MUST BE FIXED)
+        Math.ceil(Math.random() * canvas.width - obstacleImg.width), //position X (example, MUST BE FIXED)
         0, //position Y
-        Math.random() * 50 + 50, //width, example MUST BE FIXED
-        Math.random() * 50 + 50, //height, example MUST BE FIXED
-        Math.ceil(Math.random()* 0.5)//speed, example, MUST BE FIXED
+        Math.random() * 250 + 150, //width, example MUST BE FIXED
+        Math.random() * 100 + 100, //height, example MUST BE FIXED
+        Math.ceil(Math.random() * 0.5)//speed, example, MUST BE FIXED
     );
 
-    score.points +=10;
+    score.points +=5;
 
     obstaclesArray.push(obstacle);
 
-        }, 4000); //time, example MUST BE FIXED
+        }, 2000); //time, example MUST BE FIXED
 
 //Determine when the collision happens
 
     function checkCollisions(player, obstacle){
         let collision = 
+        
             player.x < obstacle.x + obstacle.width &&
             player.x + player.width > obstacle.x &&
             player.y < obstacle.y + obstacle.height &&
@@ -58,32 +59,56 @@ const score = {
         if (collision){
             cancelAnimationFrame(frameId);
             clearInterval(obstacleId);
+            
             alert('GAME OVER!')
             window.location.reload();
              }
         }
+        
 
         //Determine when a bullet kill an enemy
 
    
-   function killEnemy(){
-   for(let i=0;i<obstaclesArray.length;i++){
-		for(let j=0;j<bulletsArray.length;j++){
-
-			if(!obstaclesArray[i]) continue;
-			
-			if(bulletsArray[j].y <= obstaclesArray[i].y + obstacleImg.height && bulletsArray[j].y >= obstaclesArray[i].y){
-				if( (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j].x <= obstaclesArray[i].x + obstacleImg.width) || (bulletsArray[j].x >= obstaclesArray[i].x && bulletsArray[j]  <= obstaclesArray[i].x + obstacleImg.width) ){
-					score.points +=10;
-					obstaclesArray.splice(i, 1);
-					
-					bulletsArray.splice(j, 1);
-				}
-			}
-		}
-	}
-} 
-   
+        function killEnemy(){
+            let hit = false
+            console.log("obstacleImg: ", obstacleImg)
+        for(let i=0;i<obstaclesArray.length;i++){
+             for(let j=0;j<bulletsArray.length;j++){
+     
+                 if(!obstaclesArray[i]) continue;
+                 
+                 const bullet = bulletsArray[j]
+                 const obstacle = obstaclesArray[i]
+                 hit = (
+                     (
+                         bullet.y <= obstacle.y + obstacle.height &&
+                         bullet.y >= obstacle.y
+                     )
+                     &&
+                     (
+                         bullet.y + bullet.height >= obstacle.y &&
+                         bullet.y + bullet.height <= obstacle.y + obstacle.height
+                     )
+                     &&
+                     (
+                         bullet.x <= obstacle.x + obstacle.width &&
+                         bullet.x + bullet.width >= obstacle.x
+                     )
+                     &&
+                     (
+                         bullet.x + bullet.width <= obstacle.x + obstacle.width &&
+                         bullet.x + bullet.width >= obstacle.x 
+                     )
+                 )
+                     if(hit){
+                         score.points +=10;
+                         obstaclesArray.splice(i, 1);
+                         
+                         bulletsArray.splice(j, 1);
+                     }
+                 }
+             }
+         }
 
 
 //Scores points

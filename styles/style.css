@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   font-family: "Orbitron";
   background-color: rgb(6, 6, 10);
@@ -49,7 +54,7 @@ body {
   }
   
   #game-board {
-      float: left;
+      float: center;
       padding: 20px 0px;
   }
   

@@ -3,13 +3,13 @@ bulletImg.src = 'images/Daco_4084688.png';//ADD BULLET IMAGE
 
 class Bullet {
 constructor(canvasContext, positionX, positionY){
-    (this.ctx = canvasContext),
-    (this.image = bulletImg),
-    (this.x = positionX),
-    (this.y = positionY),
-    (this.width = 10),
-    (this.height = 10),
-    (this.speed = 5);
+    this.ctx = canvasContext;
+    this.image = bulletImg;
+    this.x = positionX;
+    this.y = positionY;
+    this.width = 10;
+    this.height = 10;
+    this.speed = 5;
 }
 
 draw() {
