@@ -3,15 +3,41 @@ window.onload = () => {
 
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
+
+    let audio = document.querySelector('audio');
+    audio.volume = 0.5;
+
     let frameId = null;
     let obstacleId = null;
     let bulletsArray = [];
+    
+    
 
 
 //Paint in the canvas from the constructors
 
     const background = new Background(ctx);
     const player = new Player (ctx, canvas.width / 2 - 100, canvas.height - 150); //this is an example, MUST BE FIXED
+
+//Create audio
+
+function bulletAudio() {
+    audio.volume = 0.5;
+    audio.src = 'sounds/lazer7.mp3';
+    audio.play();
+  }
+
+  function enemiesDied() {
+    audio.volume = 0.20;
+    audio.src = 'sounds/Explosion+1.mp3';
+    audio.play();
+  }
+ 
+
+  function gameOverAudio() {
+    audio.src = 'sounds/mixkit-retro-arcade-game-over-470.wav';
+    audio.play();
+  }
 
 //Create the score
 
@@ -51,17 +77,20 @@ const score = {
     function checkCollisions(player, obstacle){
         let collision = 
         
-            player.x < obstacle.x + obstacle.width &&
-            player.x + player.width > obstacle.x &&
-            player.y < obstacle.y + obstacle.height &&
-            player.y + player.height > obstacle.y;
+            player.x <= obstacle.x + obstacle.width &&
+            player.x + player.width >= obstacle.x &&
+            player.y <= obstacle.y + obstacle.height &&
+            player.y + player.height >= obstacle.y;
 
         if (collision){
             cancelAnimationFrame(frameId);
             clearInterval(obstacleId);
-            
-            alert('GAME OVER!')
-            window.location.reload();
+            ctx.font='25px Orbitron';
+            ctx.fillStyle = 'red';
+            ctx.fillText('GAME OVER! Your score: ' + score.points, 80, 300);
+            ctx.textAlign = "center";
+            //alert('GAME OVER!')
+            window.setTimeout(function(){location.reload()}, 4000);
              }
         }
         
@@ -71,7 +100,7 @@ const score = {
    
         function killEnemy(){
             let hit = false
-            console.log("obstacleImg: ", obstacleImg)
+            console.log("obstacleImg: ", obstacleImg);
         for(let i=0;i<obstaclesArray.length;i++){
              for(let j=0;j<bulletsArray.length;j++){
      
@@ -103,7 +132,7 @@ const score = {
                      if(hit){
                          score.points +=10;
                          obstaclesArray.splice(i, 1);
-                         
+                         enemiesDied();
                          bulletsArray.splice(j, 1);
                      }
                  }
@@ -141,8 +170,8 @@ function makeBullet (){
     ); 
 
     bulletsArray.push(bullet);
+    
 }
-
 
 //THE GAME LOGIC
 
@@ -200,7 +229,7 @@ function makeBullet (){
         event.preventDefault();
         switch (event.keyCode){
             case 37:
-            if (player.x >0) player.x -=15; //must be FIXED
+            if (player.x >0) player.x -=15;//must be FIXED
             break;
             case 39:
             if (player.x < canvas.width - player.width) player.x +=15; //must be FIXED
@@ -211,11 +240,10 @@ function makeBullet (){
                 }
                 else {
                     makeBullet();
+                    bulletAudio();
                     break;
                 }
              }
 
          }
-
-
 };
