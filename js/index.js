@@ -59,11 +59,11 @@ const score = {
     obstacleId = setInterval (function (){
         let obstacle = new Obstacle (
         ctx, 
-        Math.ceil(Math.random() * canvas.width - obstacleImg.width), //position X (example, MUST BE FIXED)
+        Math.abs(Math.ceil(Math.random() * canvas.width - obstacleImg.width)), //position X (example, MUST BE FIXED)
         0, //position Y
         Math.random() * 250 + 150, //width, example MUST BE FIXED
         Math.random() * 100 + 100, //height, example MUST BE FIXED
-        Math.ceil(Math.random() * 0.5)//speed, example, MUST BE FIXED
+        Math.ceil(Math.random() * 0.5) //speed, example, MUST BE FIXED
     );
 
     score.points +=5;
