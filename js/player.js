@@ -1,19 +1,35 @@
-const playerImg = document.createElement('img');
-playerImg.src = 'images/Mobile - Marvel Avengers Alliance - Iron Man Mark 5 Armor.png';//ADD IMAGE
 
 class Player {
     constructor(canvasContext, positionX, positionY){
+        this.playerImg = document.createElement('img');
+        this.playerImg.src = 'images/ironman360.png';//ADD IMAGE
         this.ctx = canvasContext;
-        this.image = playerImg;
         this.x = positionX;
         this.y = positionY;
-        this.width = 100;
+        this.width = 100; 
         this.height = 150;
+
+        this.scaledWidth = this.width * this.scale;
+        this.scaledHeight = this.height * this.scale;
+        this.pictureSide = 1;
+        this.scale = 1;
     }
 
     draw() {
-        this.ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
-        
+
+        this.ctx.drawImage(
+            this.playerImg,
+            this.pictureSide * 370,0,
+            370, 472,
+            this.x, this.y,
+            370/4, 472/4
+            ); 
+    /*     this.ctx.drawImage(
+        this.playerImg,
+        this.pictureSide * this.width, this.height,
+        this.width, this.height,
+        this.x, this.y,
+        this.scaledWidth, this.scaledHeight); */
     }
 };
 

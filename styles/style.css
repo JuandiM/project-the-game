@@ -6,7 +6,6 @@ html {
 
 
 body {
-  font-family: "Orbitron";
   background-color: rgb(6, 6, 10);
    size: cover;
     padding: 0;
@@ -14,11 +13,13 @@ body {
   }
   
   .game-intro {
-    float: left;
+    float: center;
     padding: 0% 10%;
   }
   
   .game-intro p {
+    float: center;
+    
     color: #08818a;
     font-size: 20px;
     font-family: "Orbitron"
@@ -26,16 +27,22 @@ body {
   }
   
   .logo-img {
-    width: 1000px;
-    margin-bottom: 20px;
-    padding-top: 50px;
+    float: center;
+    width: 800px;
+    margin-bottom: 30px;
+    padding-top: 100px;
+    
   }
   
-  .arrows-img {
-    width: 150px;
-  }
   
+  #start-button{
+    float: center;
+    margin-top: 15px;
+    
+  }
+
   body button {
+    float: center;
     font-family: "Orbitron";
     font-size: 30px;
     background-color: #054b50;
@@ -55,10 +62,11 @@ body {
   
   #game-board {
       float: center;
-      padding: 20px 0px;
+      padding: 5px 0px;
   }
   
   
   canvas {
-    border: 1px solid #054b50;
+    margin-top: 20px;
+    border: 2px solid #054b50;
   }

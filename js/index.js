@@ -9,15 +9,13 @@ window.onload = () => {
 
     let frameId = null;
     let obstacleId = null;
-    let bulletsArray = [];
-    
-    
+    const bulletsArray = [];
 
-
+  
 //Paint in the canvas from the constructors
 
     const background = new Background(ctx);
-    const player = new Player (ctx, canvas.width / 2 - 100, canvas.height - 150); //this is an example, MUST BE FIXED
+    const player = new Player (ctx, 375, 575); //this is an example, MUST BE FIXED
 
 //Create audio
 
@@ -33,20 +31,20 @@ function bulletAudio() {
     audio.play();
   }
  
-
   function gameOverAudio() {
     audio.src = 'sounds/mixkit-retro-arcade-game-over-470.wav';
     audio.play();
   }
 
-//Create the score
+//Create the score and Win Stage
+//const youWin = 20;
 
 const score = {
     points: 0,
     draw: function (){
        ctx.font = '30px Orbitron'; //this is an example, MUST BE FIXED
        ctx.fillStyle = 'gold'; //this is an example, MUST BE FIXED
-       ctx.fillText('Score: ' + this.points, 200, 50);
+       ctx.fillText('Score: ' + this.points, 300, 50);
        }
    };
 
@@ -63,16 +61,17 @@ const score = {
         0, //position Y
         Math.random() * 250 + 150, //width, example MUST BE FIXED
         Math.random() * 100 + 100, //height, example MUST BE FIXED
-        Math.ceil(Math.random() * 0.5) //speed, example, MUST BE FIXED
+        Math.ceil(Math.random() * 1) //speed, example, MUST BE FIXED
     );
 
-    score.points +=5;
+    //score.points +=5;
 
     obstaclesArray.push(obstacle);
 
         }, 2000); //time, example MUST BE FIXED
 
 //Determine when the collision happens
+
 
     function checkCollisions(player, obstacle){
         let collision = 
@@ -83,23 +82,38 @@ const score = {
             player.y + player.height >= obstacle.y;
 
         if (collision){
+            gameOverAudio()
             cancelAnimationFrame(frameId);
             clearInterval(obstacleId);
             ctx.font='25px Orbitron';
             ctx.fillStyle = 'red';
-            ctx.fillText('GAME OVER! Your score: ' + score.points, 80, 300);
+            ctx.fillText('GAME OVER! Your score: ' + score.points, 80, 200);
             ctx.textAlign = "center";
-            //alert('GAME OVER!')
+        //alert('GAME OVER!')
             window.setTimeout(function(){location.reload()}, 4000);
              }
         }
-        
+
+
+        //YOU WIN
+
+        function winner (){
+                cancelAnimationFrame(frameId);
+                clearInterval(obstacleId);
+                ctx.font='25px Orbitron';
+                ctx.fillStyle = '#054b50';
+                ctx.fillText('YOU WIN', 80, 200);
+                ctx.textAlign = "center";
+        //alert('YOU WIN!')
+                window.setTimeout(function(){location.reload()}, 4000);
+            
+        }
 
         //Determine when a bullet kill an enemy
 
    
         function killEnemy(){
-            let hit = false
+            let hit = false;
             console.log("obstacleImg: ", obstacleImg);
         for(let i=0;i<obstaclesArray.length;i++){
              for(let j=0;j<bulletsArray.length;j++){
@@ -132,8 +146,12 @@ const score = {
                      if(hit){
                          score.points +=10;
                          obstaclesArray.splice(i, 1);
-                         enemiesDied();
                          bulletsArray.splice(j, 1);
+                         enemiesDied();
+                     }
+                     if (score.points === 500){
+                         winner();
+                         break;
                      }
                  }
              }
@@ -145,13 +163,13 @@ const score = {
     function updateScore () {
         numObstaclesTotal = obstaclesArray.length;
 
-        obstaclesArray = obstaclesArray.filter((eachObstacle) => {
-        eachObstacle.y < canvas.height;
-        });
+        for(let i=0; i< obstaclesArray.length; i++){
+            if(obstaclesArray[i].y > canvas.height) obstaclesArray.splice(i, 1)
+        }
 
-        bulletsArray = bulletsArray.filter((eachBullet) => {
-            eachBullet.y < 0;
-            });
+        for(let j=0; j< bulletsArray.length; j++){
+            if(bulletsArray[i].y < 0) bulletsArray.splice(i, 1)
+        }
 
         numObstaclesOnScreen = obstaclesArray.length;
 
@@ -164,9 +182,8 @@ const score = {
 function makeBullet (){
     let bullet = new Bullet (
         ctx, 
-        player.x + player.width/1.35 - 10/2,   //position X (example, MUST BE FIXED)
+        player.x + player.width /2.75, //position X (example, MUST BE FIXED)
         player.y, //position Y
-        
     ); 
 
     bulletsArray.push(bullet);
@@ -180,9 +197,6 @@ function makeBullet (){
 
     frameId = requestAnimationFrame(gameLoop);
 
-//Testing => check if the game work with console.log
-    console.log('The Battle Started');
-
 //Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -192,22 +206,18 @@ function makeBullet (){
     score.draw();
     killEnemy();
     
-    console.log(obstaclesArray)
-
 //Loop in the array and print and move every obstacle
     obstaclesArray.forEach((eachObstacle) => {
+        eachObstacle.move();
         eachObstacle.draw();
         //console.log(`this obstacles ` , eachObstacle.draw());
-        eachObstacle.move();
         checkCollisions(player, eachObstacle);
         });
 
         //Loop in the array and print the bullets
     bulletsArray.forEach((eachBullet) => {
-        eachBullet.draw();
-        
         eachBullet.move();
-        
+        eachBullet.draw();
         });
 
 //Remove obstacles that outside of the screen and update score
@@ -217,9 +227,10 @@ function makeBullet (){
 
 //Start the game when clicking on Start button
 
-    document.getElementById('start-button').onclick = () => {
+document.getElementById('start-button').onclick = () => {
          gameLoop();
         }
+    
 
 //Add move to the player with the arrow keys adding an event listener
 
@@ -229,10 +240,12 @@ function makeBullet (){
         event.preventDefault();
         switch (event.keyCode){
             case 37:
-            if (player.x >0) player.x -=15;//must be FIXED
+            if (player.x >0) player.x -=15; //must be FIXED
+            player.pictureSide = 0;
             break;
             case 39:
             if (player.x < canvas.width - player.width) player.x +=15; //must be FIXED
+            player.pictureSide = 1;
             break;
             case 32:
                 if (event.repeat) {

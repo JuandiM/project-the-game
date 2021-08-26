@@ -1,5 +1,5 @@
 const backgroundImg = document.createElement('img');
-backgroundImg.src = 'images/city.png';//ADD BACKGROUND IMAGE
+backgroundImg.src = 'images/leigh-kellogg-sanctum-sanctorum.jpeg';//ADD BACKGROUND IMAGE
 
 
 class Background {
