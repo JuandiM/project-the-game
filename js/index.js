@@ -37,7 +37,6 @@ function bulletAudio() {
   }
 
 //Create the score and Win Stage
-//const youWin = 20;
 
 const score = {
     points: 0,
