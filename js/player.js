@@ -13,6 +13,7 @@ class Player {
 
     draw() {
         this.ctx.drawImage(playerImg, this.x, this.y, this.width, this.height);
+        
     }
 };
 
