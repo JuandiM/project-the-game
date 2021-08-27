@@ -11,14 +11,14 @@ I hope you enjoy playing this game as much as I have enjoyed developing it as pa
 Can't wait any longer to play? Click on the following link and have fun!
 
 <h2>MVP</h2>
-
-The player moves horizontally at the bottom of the game board and shoots vertically.
-Rotate player image when moving left or right.
-Enemies(obstacles) appear randomly from the top to the bottom.
-The bullets make collision with the enemies (obstacles) removing them from the canvas.
-Every time you kill an enemy, you will score 10 points and 5 points every time you avoid collisions with them.
-The game ends when the enemies touch the player.
-
+<ul>
+<li>The player moves horizontally at the bottom of the game board and shoots vertically.</li>
+<li>Rotate player image when moving left or right.</li>
+<li>Enemies(obstacles) appear randomly from the top to the bottom.</li>
+<li>The bullets make collision with the enemies (obstacles) removing them from the canvas.</li>
+<li>Every time you kill an enemy, you will score 10 points.</li>
+<li>The game ends when you reach 500 points and the game is over if the enemies touch the player.</li>
+</ul>
 <h2>Data structure</h2>
 
 <h3>index.js</h3>
