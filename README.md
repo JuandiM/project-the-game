@@ -10,6 +10,8 @@ I hope you enjoy playing this game as much as I have enjoyed developing it as pa
 
 Can't wait any longer to play? Click on the following link and have fun!
 
+https://juandim.github.io/project-the-game/
+
 <h2>MVP</h2>
 <ul>
 <li>The player moves horizontally at the bottom of the game board and shoots vertically.</li>
